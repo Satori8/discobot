@@ -1,4 +1,3 @@
-# MTAwMjg1NTA2NzM2MTIxNDU4MA.GefKAM.cyUAwrV90xkOwNsTo-9z4FA41ZISRWxi1nkiKQ
 import time
 
 from hata import Client, wait_for_interruption, IntentFlag, create_partial_channel_from_id
@@ -129,7 +128,11 @@ def randquote():
     return random.choice(lines)
 
 
-Nue = Client('MTAwMjg1NTA2NzM2MTIxNDU4MA.GefKAM.cyUAwrV90xkOwNsTo-9z4FA41ZISRWxi1nkiKQ',
+with open('token', 'r') as f:
+    token = f.readline()
+
+
+Nue = Client(token,
              intents=IntentFlag().update_by_keys(
                  guild_users=False,
                  guild_presences=False,
