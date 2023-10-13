@@ -31,26 +31,26 @@ civa_list = [
 ]
 
 magicball = [
-    "It is certain (Бесспорно)",
-    "It is decidedly so (Предрешено)",
-    "Without a doubt (Никаких сомнений)",
-    "Yes — definitely (Определённо да)",
-    "You may rely on it (Можешь быть уверен в этом)",
-    "As I see it, yes (Мне кажется — «да»)",
-    "Most likely (Вероятнее всего)",
-    "Outlook good (Хорошие перспективы)",
-    "Signs point to yes (Знаки говорят — «да»)",
-    "Yes (Да)",
-    "Reply hazy, try again (Пока не ясно, попробуй снова)",
-    "Ask again later (Спроси позже)",
-    "Better not tell you now (Лучше не рассказывать)",
-    "Cannot predict now (Сейчас нельзя предсказать)",
-    "Concentrate and ask again (Сконцентрируйся и спроси опять)",
-    "Don’t count on it (Даже не думай)",
-    "My reply is no (Мой ответ — «нет»)",
-    "My sources say no (По моим данным — «нет»)",
-    "Outlook not so good (Перспективы не очень хорошие)",
-    "Very doubtful (Весьма сомнительно)",
+    "Так.",
+    "Ні.",
+    "Спробуй ще раз пізніше.",
+    "Неможливо передбачити зараз.",
+    "Питання неоднозначне.",
+    "Все вказує на позитивну відповідь.",
+    "Все вказує на негативну відповідь.",
+    "Шанси на успіх великі.",
+    "Не спирайся на це.",
+    "Можливо, але не впевнено.",
+    "Можливо, з певними сумнівами.",
+    "Спробуй ще раз.",
+    "Перспективи хороші.",
+    "Знаки вказують на позитивний результат.",
+    "Знаки вказують на негативний результат.",
+    "Зосередься і спитай знову.",
+    "Запитай пізніше.",
+    "Важко сказати.",
+    "Краще не розповідати.",
+    "Сконцентруйся і питай знову."
 ]
 
 
@@ -94,9 +94,9 @@ async def message_create(client, message):
             if ":" in message.content:
                 cont = message.content.split(":")[-1]
             else:
-                cont = message.content.split("выбери")[-1]
+                cont = message.content.split("обери")[-1]
             cont = cont.replace("?", "")
-            cont = cont.replace("или", ",")
+            cont = cont.replace("чи", ",")
             arr = cont.split(',')
             await client.message_create(message, random.choice(arr))
         elif "dota" in message.content:
