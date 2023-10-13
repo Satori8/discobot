@@ -90,7 +90,7 @@ async def message_create(client, message):
     if client.mentioned_in(message) or (message.content and message.content.startswith("/")):
         if '???' in message.content:
             await client.message_create(message, random.choice(magicball))
-        elif "выбери" in message.content:
+        elif "обери" in message.content:
             if ":" in message.content:
                 cont = message.content.split(":")[-1]
             else:
