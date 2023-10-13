@@ -1,6 +1,6 @@
-import time
-from hata import Client, wait_for_interruption, IntentFlag, create_partial_channel_from_id
 import random
+
+from hata import Client, wait_for_interruption, IntentFlag, create_partial_channel_from_id
 
 users = {
     "kuzya": '334727140241047553',
@@ -21,7 +21,6 @@ civa_list = [users['bodya'], users['inna'], users['taras']]
 channels = {
     'ttt': '1002860244516470847'
 }
-
 
 magicball = [
     "It is certain (Бесспорно)",
@@ -56,7 +55,6 @@ def randquote():
 with open('token', 'r') as f:
     token = f.readline()
 
-
 Nue = Client(token,
              intents=IntentFlag().update_by_keys(
                  guild_users=False,
@@ -80,7 +78,8 @@ async def message_create(client, message):
         chan = create_partial_channel_from_id(799935025813913632, 0, 0)
         await client.message_create(chan, txt)
         return
-    
+
+    i = random.randint(0, 100)
     if client.mentioned_in(message) or message.content.startswith("/"):
         if '???' in message.content:
             await client.message_create(message, random.choice(magicball))
