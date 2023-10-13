@@ -3,7 +3,6 @@ import torch
 import spacy
 
 tokenizer = AutoTokenizer.from_pretrained("BlackSamorez/rudialogpt3_medium_based_on_gpt2_2ch")
-
 model = AutoModelForCausalLM.from_pretrained("BlackSamorez/rudialogpt3_medium_based_on_gpt2_2ch")
 
 DEVICE = "cpu"

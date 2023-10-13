@@ -11,11 +11,13 @@ users = {
     "boris": '582213686094200870',
     "taras": '542056426886135838',
     'strelya': '642786993994072074',
-    'satori': '717701525778071572'
+    'satori': '717701525778071572',
+    "relock": "582247565987414047",
+    "pasha": "721356775697154050"
 }
 
-dota_list = [users['kuzya'], users['bodya'], users['inna'], users['boris'], users['taras'], users['strelya'],
-             users['satori']]
+dota_list = [users['bodya'], users['inna'], users['boris'], users['taras'],
+             users['satori'], users['pasha'], users['relock']]
 civa_list = [users['bodya'], users['inna'], users['taras']]
 
 channels = {
