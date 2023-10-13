@@ -14,13 +14,21 @@ users = {
     "pasha": "721356775697154050"
 }
 
-dota_list = [users['bodya'], users['inna'], users['boris'], users['taras'],
-             users['satori'], users['pasha'], users['relock']]
-civa_list = [users['bodya'], users['inna'], users['taras']]
+dota_list = [
+    users['bodya'],
+    users['inna'],
+    users['boris'],
+    users['taras'],
+    users['satori'],
+    users['pasha'],
+    users['relock']
+]
 
-channels = {
-    'ttt': '1002860244516470847'
-}
+civa_list = [
+    users['bodya'],
+    users['inna'],
+    users['taras']
+]
 
 magicball = [
     "It is certain (Бесспорно)",
@@ -79,8 +87,7 @@ async def message_create(client, message):
         await client.message_create(chan, txt)
         return
 
-    i = random.randint(0, 100)
-    if client.mentioned_in(message) or message.content.startswith("/"):
+    if client.mentioned_in(message) or (message.content and message.content.startswith("/")):
         if '???' in message.content:
             await client.message_create(message, random.choice(magicball))
         elif "выбери" in message.content:
