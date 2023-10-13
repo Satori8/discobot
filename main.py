@@ -87,6 +87,7 @@ async def message_create(client, message):
         await client.message_create(chan, txt)
         return
 
+    # ohuyenno vazhnij koment
     if client.mentioned_in(message) or (message.content and message.content.startswith("/")):
         if '???' in message.content:
             await client.message_create(message, random.choice(magicball))
