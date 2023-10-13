@@ -1,7 +1,5 @@
 import time
-
 from hata import Client, wait_for_interruption, IntentFlag, create_partial_channel_from_id
-from model import Ebanko
 import random
 
 users = {
@@ -23,82 +21,7 @@ civa_list = [users['bodya'], users['inna'], users['taras']]
 channels = {
     'ttt': '1002860244516470847'
 }
-ebanko = Ebanko()
 
-mat = [
-    "че сука",
-    "че блять",
-    "че городишь то",
-    "че мелешь",
-    "слышь бля",
-    "я твой рот выебу",
-    "я твой рот выебу ты гандон",
-    "такой пиздятины вломлю",
-    "я приеду твою жопу засуну",
-    "ты сука пидарас",
-    "слыш щенок блять",
-    "давай всретимся такой пиздятины получишь",
-    "иди нахуй сука",
-    "иди нахуй",
-    "да иди ты нахуй",
-    "слышь соска ебало закрой",
-    "ебало закрыл или ебало закрыла",
-    "ебало завали бля",
-    "ебало завали блять",
-    "ты сука пидарас",
-    "да ты мой хуй сосешь гандон",
-    "ты с моего хуя будешь кушать",
-    "да ты ваще охуевший",
-    "слышь хуесосина",
-    "тут твой рот выебут",
-    "ты хочешь чтобы я тебя выебал просто",
-    "с моего хуя хоть десять сделаю тебя устраивает",
-    "ебало на нуль",
-    "пасть закрой сучара бля",
-    "пиздельник завали",
-    "ты сучка ебанная",
-    "ты сука",
-    "ты блять",
-    "ты гнида сука",
-    "слыш щенок блять",
-    "я поймаю тебя тебе больно будет",
-    "я приеду такой пиздятины тебе вломлю",
-    "сосать заставлю суку бля",
-    "тут ваши не ляшут щенок",
-    "в глаза смотри мне сука",
-    "ты сука пидарас",
-    "ты пидарас ,ты гандон я на личности пошел",
-    "я ебал твой рот",
-    "да я тебе хуй рот засуну блять",
-    "ты или ебанутый или",
-    "еще есть ебанутые как ты",
-    "слыш ты берега походу попутал",
-    "да я че то непойму ты или ебанутый или че",
-    "ты выебываешся ебаный ты в рот",
-    "ты мой хуй кушай блять че звонишь чебуречный",
-    "с моего хуя хоть десять сделаю тебя устраивает",
-    "кто чеббуреки кушает и кто заказывает того роз ебал ты че ебнутый что ли",
-    "блять еще есть такие ебанутые как ты",
-    "ты че ебнутый что ли",
-    "ебаный в рот ты понимаешь не о чем сейчас",
-    "ну а че тогда выебываешся блять",
-    "тут твой рот выебут",
-    "я ебал таких клиентов с утра до ночи",
-    "таких клиентов как ты я ебу в жопу выебу",
-    "да ты мой хуй сосешь гандон ты че",
-    "ты с моего хуя будешь кушать",
-    "ты хочешь чтобы я тебя выебал просто",
-    "да я тебе хуй рот засуну блять",
-    "я твой рот выебу",
-    "я тебя выебу сука",
-    "я твой рот выебу ты забудешь где родился и как родился",
-    "блять сука я застрелю тебя блять ты че ахуевший гандон ты че",
-    "за такие вещи я тебя закопаю",
-    "я если поймаю тебе очень больно будет",
-    "блять я твой рот ебал ты где сейчас я сейчас приеду",
-    "я сейчас приеду я твою жопу засуну",
-    "да ты приключений ищешь на свою жопу",
-]
 
 magicball = [
     "It is certain (Бесспорно)",
@@ -157,20 +80,9 @@ async def message_create(client, message):
         chan = create_partial_channel_from_id(799935025813913632, 0, 0)
         await client.message_create(chan, txt)
         return
-
-    i = random.randint(0, 100)
-    if 'mkm' in message.author.full_name and not client.mentioned_in(message):
-        if i >= 95:
-            await client.message_create(message, ebanko.toxify(message.content))
-    elif client.mentioned_in(message) or message.content.startswith("/"):
-        if 'mkm' in message.author.full_name:
-            if i >= 70:
-                await client.message_create(message, ebanko.toxify(message.content))
-            else:
-                await client.message_create(message, randquote())
-        elif 'скажи ему' in message.content:
-            await client.message_create(message.channel, f"<@!{users['kuzya']}> " + random.choice(mat))
-        elif '???' in message.content:
+    
+    if client.mentioned_in(message) or message.content.startswith("/"):
+        if '???' in message.content:
             await client.message_create(message, random.choice(magicball))
         elif "выбери" in message.content:
             if ":" in message.content:
@@ -193,8 +105,6 @@ async def message_create(client, message):
                 msg += f"<@{user}> "
             msg += "Cybersport time: Civa!"
             await client.message_create(message.channel, msg)
-        elif "/2" in message.content:
-            await client.message_create(message, ebanko.toxify(message.content))
         else:
             await client.message_create(message, randquote())
 
