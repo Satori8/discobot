@@ -114,7 +114,6 @@ async def message_create(client, message):
         else:
             await client.message_create(message, randquote())
 
-
 Nue.start()
 
 wait_for_interruption()
