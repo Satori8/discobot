@@ -1,12 +1,12 @@
-class Rooms:
+class Channels:
     def __init__(self):
         pass
 
-    Reception = "745549605697093636"
-    Tavern = "799935025813913632"
-    Wordle = "1154020328968818759"
-    Doka = "970608339174166548"
-
+    Reception = 745549605697093636
+    Tavern = 799935025813913632
+    Wordle = 1154020328968818759
+    Doka = 970608339174166548
+    Test = 1162703392704057397
 
 
 class Users:
@@ -22,8 +22,9 @@ class Users:
     Satori = '717701525778071572'
     Redlock = "582247565987414047"
     Pasha = "721356775697154050"
-
-    dota_list = [Bodya, Inna, Boris, Taras, Satori, Redlock, Pasha]
+    Sanya = "694619870746247209"
+    Prohor = "862920829230514207"
+    dota_list = [Bodya, Inna, Boris, Taras, Satori, Redlock, Pasha, Sanya, Prohor]
     civa_list = [Bodya, Inna, Taras]
 
 
