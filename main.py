@@ -1,4 +1,4 @@
-from wordle.result_parser import WordleResultParser
+from result_parser import WordleResultParser
 from constants import Users, magicball, Channels
 from datetime import datetime
 import discord
