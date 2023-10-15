@@ -27,7 +27,11 @@ class WordleResultParser:
             if not res:
                 continue
             game, score, player = res
-            name = player.global_name
+            if player.global_name is not None:
+                name = player.global_name
+            else:
+                name = player.name
+
             if game not in stats:
                 stats.update({game: {}})
             if name not in stats[game]:

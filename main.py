@@ -53,7 +53,7 @@ async def send_stats(week):
         stats[game] = dict(sorted(stats[game].items(), key=lambda item: item[1][0]))
         for player in stats[game]:
             stats_message += f"{player} : {stats[game][player][0]}"
-            if stats[game][player][1]:
+            if stats[game][player][1] > 1:
                 stats_message += f" after {stats[game][player][1]} attemps"
             stats_message += "\n"
         stats_message += "\n"
