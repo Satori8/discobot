@@ -92,7 +92,7 @@ async def on_message(message):
             await wordle.solve(message)
             if wordle.state == 4:
                 wordle = None
-        else:
+        elif channel:
             await discobot.get_channel(channel).send(txt)
 
     if discobot.user.mentioned_in(message) or (message.content and message.content.startswith("\\")):
