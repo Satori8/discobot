@@ -74,10 +74,12 @@ async def on_message(message):
     if not message.guild:
         global wordle_mode, wordle
         txt = message.content
-        channel = Channels.Tavern
+        channel = None
         if txt.startswith("Wordle"):
             channel = Channels.Wordle
         if txt.startswith("\\c"):
+            if "таверна" in txt.lower():
+                channel = Channels.Tavern
             if "wordle" in txt.lower():
                 channel = Channels.Wordle
             elif "doka2" in txt.lower():
