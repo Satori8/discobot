@@ -1,17 +1,14 @@
-from result_parser import WordleResultParser
-from constants import Users, magicball, Channels
-from datetime import datetime
-import discord
 import random
 
+import discord
+from discord.ext import commands
+
+from constants import Channels, magicball, Users
+from wordle import WordleResultParser, Wordle
+
 TEST = False
-
-
-def random_quote():
-    with open("quotes.txt", "r", encoding="utf-8") as f:
-        lines = f.readlines()
-    return random.choice(lines)
-
+wordle_mode = False
+wordle: Wordle = None
 
 if TEST:
     with open('test_token', 'r') as f:
@@ -22,7 +19,9 @@ else:
 
 intents = discord.Intents.default()
 intents.message_content = True
-discobot = discord.Client(intents=intents)
+# discobot = discord.Client(command_prefix="\\", intents=intents)
+discobot = commands.Bot(command_prefix='\\', intents=intents)
+discobot.remove_command("help")
 
 
 @discobot.event
@@ -30,53 +29,72 @@ async def on_ready():
     print('online')
 
 
-async def send_stats(week):
-    stats_message = ''
-    channel = discobot.get_channel(Channels.Wordle)
-    time = datetime.today()
-    time = time.replace(hour=0, minute=0)
-    if week:
-        stats_message += f" ::: Stats of a week :::\n\n"
-        time = time.replace(day=time.day - 7)
-    else:
-        stats_message += f" ::: Stats of a day :::\n\n"
-    history = channel.history(limit=500, after=time)
-    messages = [i async for i in history]
-    stats = WordleResultParser.get_stats(messages)
+@discobot.command(name="stats", description="Show wordle stats")
+async def send_stats(ctx, *arg):
+    week = (arg and arg[0] == "week")
+    await WordleResultParser.send_stats(ctx, week)
 
-    if stats == {}:
-        await channel.send("No stats")
-        return
 
-    for game in stats:
-        stats_message += f" ::: {game} :::\n"
-        stats[game] = dict(sorted(stats[game].items(), key=lambda item: item[1][0]))
-        for player in stats[game]:
-            stats_message += f"{player} : {stats[game][player][0]}"
-            if stats[game][player][1] > 1:
-                stats_message += f" after {stats[game][player][1]} attemps"
-            stats_message += "\n"
-        stats_message += "\n"
-    await channel.send(stats_message)
+@discobot.command(name="d", description="Call all people to dota")
+async def dota_call(ctx):
+    msg = ''
+    for user in Users.dota_list:
+        msg += f"<@{user}> "
+    msg += "Cybersport time: Dota!"
+    ctx.send(msg)
+
+
+@discobot.command(name="w", description="Direct message command. Play wordle.")
+@commands.dm_only()
+async def play_wordle(ctx):
+    global wordle
+    await ctx.message.author.send(
+        "```Lest play wordle. Give me a word, then follow it with feedback in format:\n\t'*****' where '*': \n\t\t 'y' for yellow letters\n\t\t 'g' for green letters\n\t\t 'w' for white(gray) letters\n For example: 'gwwgy'\n 'stop' - to stop\n 'restart' - to restart```")
+    wordle = Wordle()
+
+
+@discobot.command(name="help", description="Returns all commands available")
+async def help(ctx):
+    helptext = "```"
+
+    for command in discobot.commands:
+        helptext += f"\\{command} - {command.description}\n"
+    helptext += "```"
+    await ctx.send(helptext)
 
 
 @discobot.event
 async def on_message(message):
+    global wordle
     if message.author.bot:
         return
 
-    if message.channel.type == 1:
+    await discobot.process_commands(message)
+
+    if not message.guild:
+        global wordle_mode, wordle
         txt = message.content
-        await discobot.get_channel(Channels.Tavern).send(txt)
+        channel = Channels.Tavern
+        if txt.startswith("Wordle"):
+            channel = Channels.Wordle
+        if txt.startswith("\\c"):
+            if "wordle" in txt.lower():
+                channel = Channels.Wordle
+            elif "doka2" in txt.lower():
+                channel = Channels.Doka
+            elif "test" in txt.lower():
+                channel = Channels.Test
+            txt = " ".join(txt.split(" ")[2:])
+
+        if wordle:
+            await wordle.solve(message)
+            if wordle.state == 4:
+                wordle = None
+        else:
+            await discobot.get_channel(channel).send(txt)
 
     if discobot.user.mentioned_in(message) or (message.content and message.content.startswith("\\")):
         msg = ''
-
-        if '\\stats' in message.content:
-            if 'week' in message.content:
-                await send_stats(1)
-            else:
-                await send_stats(0)
 
         if '???' in message.content:
             msg = random.choice(magicball)
@@ -96,21 +114,18 @@ async def on_message(message):
             arr = cont.split(',')
             msg = random.choice(arr)
 
-        elif "dota" in message.content or message.content == "\\d":
-            for user in Users.dota_list:
-                msg += f"<@{user}> "
-            msg += "Cybersport time: Dota!"
-
-        elif "civa" in message.content or message.content == "\\c":
-            for user in Users.civa_list:
-                msg += f"<@{user}> "
-            msg += "Cybersport time: Civa!"
-
         elif message.content == f"<@{discobot.user.id}>":
             msg = random_quote()
 
         if msg:
             await message.channel.send(msg)
+
+
+def random_quote():
+    with open("quotes.txt", "r", encoding="utf-8") as f:
+        lines = f.readlines()
+    return random.choice(lines)
+
 
 
 discobot.run(token)
