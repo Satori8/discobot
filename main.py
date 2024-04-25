@@ -2,11 +2,12 @@ import random
 
 import discord
 from discord.ext import commands
-
+import io
+import dota2_strats
 from constants import Channels, magicball, Users
 from wordle import WordleResultParser, Wordle
 
-TEST = False
+TEST = True
 wordle_mode = False
 wordle: Wordle = None
 
@@ -19,7 +20,6 @@ else:
 
 intents = discord.Intents.default()
 intents.message_content = True
-# discobot = discord.Client(command_prefix="\\", intents=intents)
 discobot = commands.Bot(command_prefix='\\', intents=intents)
 discobot.remove_command("help")
 
@@ -41,7 +41,29 @@ async def dota_call(ctx):
     for user in Users.dota_list:
         msg += f"<@{user}> "
     msg += "Cybersport time: Dota!"
-    ctx.send(msg)
+    await ctx.send(msg)
+
+
+@discobot.command(name="s", description="Random strat for dota")
+async def dota_call(ctx):
+    name, heroes = dota2_strats.random_strat()
+    msg = f'Рандомна страта: {name}\n'
+    image = dota2_strats.make_portraits_image(heroes)
+    with io.BytesIO() as image_binary:
+        image.save(image_binary, 'PNG')
+        image_binary.seek(0)
+        await ctx.send(msg, file=discord.File(fp=image_binary, filename='image.png'))
+
+
+@discobot.command(name="strats", description="Show all strats for dota")
+async def dota_call(ctx):
+    msg = '```All saved strats for dota:\n'
+    strats = dota2_strats.parse_strats()
+    for strat in strats:
+        name, heroes = strat
+        msg += name + ": " + ",".join(heroes)
+    msg += "```"
+    await ctx.send(msg)
 
 
 @discobot.command(name="w", description="Direct message command. Play wordle.")
@@ -78,7 +100,7 @@ async def on_message(message):
         if txt.startswith("Wordle"):
             channel = Channels.Wordle
         if txt.startswith("\\c"):
-            if "таверна" in txt.lower():
+            if "шинок" in txt.lower():
                 channel = Channels.Tavern
             if "wordle" in txt.lower():
                 channel = Channels.Wordle
@@ -127,7 +149,6 @@ def random_quote():
     with open("quotes.txt", "r", encoding="utf-8") as f:
         lines = f.readlines()
     return random.choice(lines)
-
 
 
 discobot.run(token)

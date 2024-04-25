@@ -24,7 +24,7 @@ class Users:
     Pasha = "721356775697154050"
     Sanya = "694619870746247209"
     Prohor = "862920829230514207"
-    dota_list = [Bodya, Inna, Boris, Taras, Satori, Redlock, Pasha, Sanya, Prohor]
+    dota_list = [Bodya, Boris, Taras, Satori, Redlock, Pasha, Sanya, Prohor, Pasha]
     civa_list = [Bodya, Inna, Taras]
 
 
