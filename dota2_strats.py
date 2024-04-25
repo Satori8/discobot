@@ -1,8 +1,9 @@
 import random
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
+
 
 def parse_strats():
-    with open("strats.txt") as f:
+    with open("strats.txt", encoding="UTF-8") as f:
         lines = f.readlines()
         strats = []
         for line in lines:
@@ -15,6 +16,7 @@ def parse_strats():
 
 def random_strat():
     return random.choice(parse_strats())
+
 
 def make_hero_image_links(heroes):
     links = []
@@ -37,9 +39,39 @@ def make_portraits_image(heroes):
 
     x_offset = 0
     for im in images:
-      new_im.paste(im, (x_offset,0))
-      x_offset += im.size[0]
+        new_im.paste(im, (x_offset, 0))
+        x_offset += im.size[0]
 
     return new_im
+
+
+def make_name_image(name):
+    pass
+
+
+def make_full_strats_image():
+    max_width = 0
+    max_height = 0
+    strat_images = []
+    for strat in parse_strats():
+        str = strat[0]
+        heroes_image = make_portraits_image(strat[1])
+        text_offest = 200
+        font = ImageFont.truetype('arial', 16)
+        text_width = font.getmask(str).getbbox()[2]
+        new_im = Image.new('RGBA', (heroes_image.width + text_offest, 32))
+        d1 = ImageDraw.Draw(new_im)
+        d1.text((text_offest - text_width - 5, 7), str, fill=(255, 255, 255), font=font)
+        new_im.paste(heroes_image, (text_offest, 0))
+        if new_im.width > max_width:
+            max_width = new_im.width
+        max_height += new_im.height
+        strat_images.append(new_im)
+    strats_image = Image.new('RGBA', (max_width, max_height))
+    y_offset = 0
+    for img in strat_images:
+        strats_image.paste(img, (0, y_offset))
+        y_offset += img.height
+    return strats_image
 
 i = 0

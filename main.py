@@ -57,14 +57,12 @@ async def dota_call(ctx):
 
 @discobot.command(name="strats", description="Show all strats for dota")
 async def dota_call(ctx):
-    msg = '```All saved strats for dota:\n'
-    strats = dota2_strats.parse_strats()
-    for strat in strats:
-        name, heroes = strat
-        msg += name + ": " + ",".join(heroes)
-    msg += "```"
-    await ctx.send(msg)
-
+    msg = 'Всі записані стратки:\n'
+    image = dota2_strats.make_full_strats_image()
+    with io.BytesIO() as image_binary:
+        image.save(image_binary, 'PNG')
+        image_binary.seek(0)
+        await ctx.send(msg, file=discord.File(fp=image_binary, filename='image.png'))
 
 @discobot.command(name="w", description="Direct message command. Play wordle.")
 @commands.dm_only()
