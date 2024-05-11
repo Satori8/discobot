@@ -12,8 +12,9 @@ wordle_mode = False
 wordle: Wordle = None
 
 if TEST:
-    with open('test_token', 'r') as f:
-        token = f.readline()
+    #with open('test_token', 'r') as f:
+    #    token = f.readline()
+    token = input("token: ")
 else:
     with open('token', 'r') as f:
         token = f.readline()

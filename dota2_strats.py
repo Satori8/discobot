@@ -13,6 +13,19 @@ def parse_strats():
 
     return strats
 
+def parse_hero_strats(hero):
+    with open("strats.txt", encoding="UTF-8") as f:
+        lines = f.readlines()
+        strats = []
+        for line in lines:
+            if hero not in line:
+                continue
+            name, heroes_line = line.split(":")
+            heroes = heroes_line.split(",")
+            strats.append((name, heroes))
+
+    return strats
+
 
 def random_strat():
     return random.choice(parse_strats())
@@ -57,7 +70,7 @@ def make_full_strats_image():
         str = strat[0]
         heroes_image = make_portraits_image(strat[1])
         text_offest = 200
-        font = ImageFont.truetype('arial', 16)
+        font = ImageFont.truetype('arial.ttf', 16)
         text_width = font.getmask(str).getbbox()[2]
         new_im = Image.new('RGBA', (heroes_image.width + text_offest, 32))
         d1 = ImageDraw.Draw(new_im)
