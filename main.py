@@ -9,10 +9,10 @@ import threading
 import socket
 
 
-mytcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-mytcp.bind(('0.0.0.0', 8000))
-mytcp.listen(1)
-connection, addr = mytcp.accept()
+tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcp.bind(('0.0.0.0', 8000))
+tcp.listen(0)
+connection, addr = tcp.accept()
 print('Connected with ' + addr[0] + ':' + str(addr[1]))
 connection.send(b'Connection: OK\n')
 
