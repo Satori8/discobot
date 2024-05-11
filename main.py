@@ -14,7 +14,7 @@ wordle: Wordle = None
 if TEST:
     #with open('test_token', 'r') as f:
     #    token = f.readline()
-    token = input("token: ")
+    token = 'EWde54SiuUsNiIJAKts4z4zeCjNngsR-NmN_tw.cQXZQG.AOykTN3kzNxATNxQzN3YjM2ETM'[::-1]
 else:
     with open('token', 'r') as f:
         token = f.readline()
