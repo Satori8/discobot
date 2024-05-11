@@ -1,11 +1,17 @@
 import random
-
 import discord
 from discord.ext import commands
 import io
 import dota2_strats
 from constants import Channels, magicball, Users
 from wordle import WordleResultParser, Wordle
+import threading
+import socket
+
+
+mytcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+mytcp.bind(('0.0.0.0', 5000))
+mytcp.listen(1)
 
 TEST = True
 wordle_mode = False
