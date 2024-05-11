@@ -86,5 +86,3 @@ def make_full_strats_image():
         strats_image.paste(img, (0, y_offset))
         y_offset += img.height
     return strats_image
-
-make_full_strats_image()
