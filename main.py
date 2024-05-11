@@ -9,7 +9,7 @@ from threading import Thread
 import socket
 import time
 
-TEST = True
+TEST = False
 wordle_mode = False
 wordle: Wordle = None
 
