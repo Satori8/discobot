@@ -9,7 +9,7 @@ from threading import Thread
 import socket
 import time
 
-TEST = False
+TEST = True
 wordle_mode = False
 wordle: Wordle = None
 
@@ -62,10 +62,19 @@ async def dota_call(ctx):
 
 
 @discobot.command(name="s", description="Random strat for dota")
-async def dota_call(ctx):
-    name, heroes = dota2_strats.random_strat()
-    msg = f'Рандомна страта: {name}\n'
-    image = dota2_strats.make_portraits_image(heroes)
+async def single_strat(ctx, arg=None):
+    msg = ""
+    if not arg:
+        name, heroes = dota2_strats.random_strat()
+        msg = f'Рандомна страта: {name}\n'
+        image = dota2_strats.make_portraits_image(heroes)
+    else:
+        strats = dota2_strats.strat_for_hero(arg)
+        if not strats:
+            msg = "хуй"
+            image = dota2_strats.make_portraits_image(["fuck"])
+        else:
+            image = dota2_strats.make_strats_image(strats)
     with io.BytesIO() as image_binary:
         image.save(image_binary, 'PNG')
         image_binary.seek(0)
@@ -73,9 +82,9 @@ async def dota_call(ctx):
 
 
 @discobot.command(name="strats", description="Show all strats for dota")
-async def dota_call(ctx):
+async def all_strats(ctx):
     msg = 'Всі записані стратки:\n'
-    image = dota2_strats.make_full_strats_image()
+    image = dota2_strats.make_strats_image()
     with io.BytesIO() as image_binary:
         image.save(image_binary, 'PNG')
         image_binary.seek(0)

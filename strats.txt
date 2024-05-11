@@ -12,7 +12,7 @@
 Жиди: ogre_magi, bounty_hunter, arc_warden, doom, dazzle, lone_druid, alchemist
 Лісники: nature's_prophet, lone_druid, enchantress, chen, hoodwink, lycan, beastmaster, troll_warlord, treant_protector
 Підпалення: queen_of_pain, ogre_magi, axe, venomancer, viper
-Нажор: silencer, legion_commander, pudge, slark, bounty_hunter
+Нажор: silencer, legion_commander, pudge, slark, bounty_hunter, lion, axe, necrophos
 Аури: vengeful_spirit, luna, drow_ranger, doom, chen, beastmaster, underlord, ogre_magi
 Жуки: broodmother, weaver, sand_king, nyx_assassin, venomancer
 Гноми: sniper, timbersaw, tinker, alchemist, gyrocopter, snapfire, clockwerk

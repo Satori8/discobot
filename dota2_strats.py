@@ -8,22 +8,18 @@ def parse_strats():
         strats = []
         for line in lines:
             name, heroes_line = line.split(":")
+            heroes_line = heroes_line.replace(" ", "")
             heroes = heroes_line.split(",")
             strats.append((name, heroes))
 
     return strats
 
-def parse_hero_strats(hero):
-    with open("strats.txt", encoding="UTF-8") as f:
-        lines = f.readlines()
-        strats = []
-        for line in lines:
-            if hero not in line:
-                continue
-            name, heroes_line = line.split(":")
-            heroes = heroes_line.split(",")
-            strats.append((name, heroes))
 
+def strat_for_hero(hero):
+    strats = []
+    for strat in parse_strats():
+        if hero in strat[1]:
+            strats.append(strat)
     return strats
 
 
@@ -58,15 +54,13 @@ def make_portraits_image(heroes):
     return new_im
 
 
-def make_name_image(name):
-    pass
-
-
-def make_full_strats_image():
+def make_strats_image(strats = None):
     max_width = 0
     max_height = 0
     strat_images = []
-    for strat in parse_strats():
+    if not strats:
+        strats = parse_strats()
+    for strat in strats:
         str = strat[0]
         heroes_image = make_portraits_image(strat[1])
         text_offest = 200
