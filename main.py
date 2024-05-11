@@ -5,17 +5,22 @@ import io
 import dota2_strats
 from constants import Channels, magicball, Users
 from wordle import WordleResultParser, Wordle
-import threading
+from threading import Thread
 import socket
+import time
 
 
 tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 tcp.bind(('0.0.0.0', 8000))
-tcp.listen(0)
-connection, addr = tcp.accept()
-print('Connected with ' + addr[0] + ':' + str(addr[1]))
-connection.send(b'Connection: OK\n')
+tcp.listen(1)
+def accepter():
+    while True:
+        connection, addr = tcp.accept()
+        print('Connected with ' + addr[0] + ':' + str(addr[1]))
+        connection.send(b'Connection: OK\n')
+        time.sleep(1)
 
+Thread(target=accepter).start()
 
 TEST = True
 wordle_mode = False
