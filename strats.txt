@@ -1,0 +1,24 @@
+Токсичні: viper, venomancer, necrophos, undying, dazzle, alchemist
+Відморожені: drow_ranger, ancient_apparition, tusk, crystal_maiden, winter_wyvern, lich
+Вогняні: ember_spirit, lina, clinkz, phoenix, jakiro, ogre_magi, doom, dragon_knight, dawnbreaker, batrider
+Электричні: storm_spirit, razor, zeus, disruptor, arc_warden
+Водяні: morphling, kunkka, tidehunter, slardar, naga_siren, slark
+Спіріти: earth_spirit, ember_spirit, void_spirit, storm_spirit, vengeful_spirit, spirit_breaker
+Дракони: jakiro, winter_wyvern, dragon_knight, viper, puck, phoenix
+Глобал: dawnbreaker, bloodseeker, spirit_breaker, spectre, io, zeus, nature's_prophet, invoker, ancient_apparition
+Безконтактні: bounty_hunter, sniper, tinker, luna, ogre_magi, skywrath_mage, gyrocopter, keeper_of_the_light, grimstroke, windranger, clockwerk
+Мертв'яки: undying, necrophos, clinkz, muerta, death_prophet, lich, abaddon
+Бліенкери: faceless_void, anti-mage, queen_of_pain, morphling, timbersaw, riki
+Жиди: ogre_magi, bounty_hunter, arc_warden, doom, dazzle, lone_druid, alchemist
+Лісники: nature's_prophet, lone_druid, enchantress, chen, hoodwink, lycan, beastmaster, troll_warlord, treant_protector
+Підпалення: queen_of_pain, ogre_magi, axe, venomancer, viper
+Нажор: silencer, legion_commander, pudge, slark, bounty_hunter
+Аури: vengeful_spirit, luna, drow_ranger, doom, chen, beastmaster, underlord, ogre_magi
+Жуки: broodmother, weaver, sand_king, nyx_assassin, venomancer
+Гноми: sniper, timbersaw, tinker, alchemist, gyrocopter, snapfire, clockwerk
+Кавалерія: abaddon, chaos_knight, luna, mirana, keeper_of_the_light, centaur_warrunner, magnus,  alchemist
+Оверхіл: necrophos, abaddon, omniknight, dazzle, warlock, juggernaut, lifestealer, chen, enchantress, oracle, winter_wyvern, phoenix, undying
+Демони: shadow_demon, doom, lion, shadow_fiend, queen_of_pain, underlord
+Інвіз: bounty_hunter, slardar, clinkz, weaver, nyx_assassin, visage
+Крилаті: jakiro, winter_wyvern, dragon_knight, viper, phoenix, puck, skywrath_mage, batrider, dark_willow, night_stalker, outworld_destroyer, visage
+Жир_зі_станом: axe, sand_king, wraith_king, sven, tidehunter, beastmaster, primal_beast, ogre_magi, dragon_knight, earthshaker, legion_commander, mars, dawnbreaker, clockwerk, slardar, doom, alchemist, treant_protector, pudge

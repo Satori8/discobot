@@ -9,30 +9,31 @@ from threading import Thread
 import socket
 import time
 
-
-tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-tcp.bind(('0.0.0.0', 8000))
-tcp.listen(1)
-def accepter():
-    while True:
-        connection, addr = tcp.accept()
-        print('Connected with ' + addr[0] + ':' + str(addr[1]))
-        connection.send(b'Connection: OK\n')
-        time.sleep(1)
-
-Thread(target=accepter).start()
-
 TEST = True
 wordle_mode = False
 wordle: Wordle = None
 
+tcp = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+tcp.bind(('0.0.0.0', 8000))
+tcp.listen(1)
+
+
+def ping_accepter():
+    while True:
+        connection, addr = tcp.accept()
+        connection.send(b'Connection: OK\n')
+        time.sleep(1)
+
+
+Thread(target=ping_accepter).start()
+
 if TEST:
-    #with open('test_token', 'r') as f:
-    #    token = f.readline()
-    token = 'EWde54SiuUsNiIJAKts4z4zeCjNngsR-NmN_tw.cQXZQG.AOykTN3kzNxATNxQzN3YjM2ETM'[::-1]
-else:
-    with open('token', 'r') as f:
+    with open('test_token', 'r') as f:
         token = f.readline()
+else:
+    # with open('token', 'r') as f:
+    #     token = f.readline()
+    token = 'cJ-_iJC1aBZ8pDy15bH8pRwjG0rPL_QdsHv661.v0W-PG.AM4UDNxITM2MzN2ATN1gjMwATM'[::-1]
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -79,6 +80,7 @@ async def dota_call(ctx):
         image.save(image_binary, 'PNG')
         image_binary.seek(0)
         await ctx.send(msg, file=discord.File(fp=image_binary, filename='image.png'))
+
 
 @discobot.command(name="w", description="Direct message command. Play wordle.")
 @commands.dm_only()

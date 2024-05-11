@@ -87,4 +87,4 @@ def make_full_strats_image():
         y_offset += img.height
     return strats_image
 
-i = 0
+make_full_strats_image()
