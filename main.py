@@ -149,7 +149,7 @@ async def on_message(message):
             msg = random.choice(magicball)
 
         elif "\\o" in message.content:
-            msg = f"<@{message.author.id}> o/"
+            msg = f"<@{message.author.id}> \ó"
         elif "o/" in message.content:
             f"<@{message.author.id}> \\o"
 
